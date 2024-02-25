@@ -1,4 +1,3 @@
-
 export interface Nutrition {
 	kcal: number
 	fat: number

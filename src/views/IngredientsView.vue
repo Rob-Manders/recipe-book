@@ -7,27 +7,27 @@
 </template>
 
 <script setup lang="ts">
-import { useIngredientStore } from '@/stores/ingredients';
-import Ingredient from '../components/Ingredient.vue'
-import { storeToRefs } from 'pinia';
+	import { useIngredientStore } from '@/stores/ingredients'
+	import Ingredient from '../components/Ingredient.vue'
+	import { storeToRefs } from 'pinia'
 
-const ingredientStore = useIngredientStore()
+	const ingredientStore = useIngredientStore()
 
-const { ingredients } = storeToRefs(ingredientStore)
-const { addIngredient } = ingredientStore
+	const { ingredients } = storeToRefs(ingredientStore)
+	const { addIngredient } = ingredientStore
 
-const newIngredient = {
-	name: 'Onion',
-	brand: 'Generic',
-	nutrition: {
-		kcal: 40,
-		fat: 0.1,
-		saturatedFat: 0,
-		carbohydrate: 9,
-		sugars: 4.2,
-		fibre: 1.7,
-		protein: 1.1,
-		salt: 0.012
+	const newIngredient = {
+		name: 'Onion',
+		brand: 'Generic',
+		nutrition: {
+			kcal: 40,
+			fat: 0.1,
+			saturatedFat: 0,
+			carbohydrate: 9,
+			sugars: 4.2,
+			fibre: 1.7,
+			protein: 1.1,
+			salt: 0.012
+		}
 	}
-}
 </script>

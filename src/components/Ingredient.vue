@@ -14,19 +14,10 @@
 </template>
 
 <script setup lang="ts">
-import type { DocumentData } from 'firebase/firestore';
+	import type { DocumentData } from 'firebase/firestore'
 
-const props = defineProps<{ ingredient: DocumentData }>()
+	const props = defineProps<{ ingredient: DocumentData }>()
 
-const { name, brand } = props.ingredient
-const {
-	kcal,
-	fat,
-	saturatedFat,
-	carbohydrate,
-	sugars,
-	fibre,
-	protein,
-	salt
-} = props.ingredient.nutrition
+	const { name, brand } = props.ingredient
+	const { kcal, fat, saturatedFat, carbohydrate, sugars, fibre, protein, salt } = props.ingredient.nutrition
 </script>

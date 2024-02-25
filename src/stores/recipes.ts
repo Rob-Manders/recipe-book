@@ -7,10 +7,7 @@ export const useRecipeStore = defineStore('recipe', () => {
 	const recipes = ref<Recipe[]>([])
 
 	function addRecipe(recipe: Recipe) {
-		recipes.value = [
-			...recipes.value,
-			recipe
-		]
+		recipes.value = [...recipes.value, recipe]
 
 		// Add recipe to Firestore.
 	}

@@ -1,18 +1,18 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { useFirestore, useCollection } from 'vuefire'
-import { collection } from 'firebase/firestore'
+import { collection, type DocumentData } from 'firebase/firestore'
 
 import type { Ingredient } from '@/types'
 
 const db = useFirestore()
 
 export const useIngredientStore = defineStore('ingredient', () => {
-  const ingredients = useCollection(collection(db, 'ingredients'))
+	const ingredients = useCollection(collection(db, 'ingredients'))
 
 	console.log(ingredients.value)
 
-	function addIngredient(ingredient: Ingredient) {
+	function addIngredient(ingredient: DocumentData) {
 		// ingredients.value = [
 		// 	...ingredients.value,
 		// 	ingredient
@@ -23,5 +23,13 @@ export const useIngredientStore = defineStore('ingredient', () => {
 		console.log('Add ingredient...')
 	}
 
-  return { ingredients, addIngredient }
+	function editIngredient(id: string, ingredient: DocumentData) {
+		console.log('Edit ingredient...')
+	}
+
+	function deleteIngredient(id: string) {
+		console.log('Delete ingredient...')
+	}
+
+	return { ingredients, addIngredient, editIngredient, deleteIngredient }
 })
