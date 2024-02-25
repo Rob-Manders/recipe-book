@@ -1,7 +1,7 @@
 <template>
 	<h1>Ingredients</h1>
 
-	<!-- <button @click="() => addIngredient(newIngredient)">Add Ingredient</button> -->
+	<button @click="() => addIngredient(newIngredient)">Add Ingredient</button>
 
 	<Ingredient v-for="ingredient in ingredients" :ingredient="ingredient" :key="ingredient.id" />
 </template>
@@ -17,7 +17,7 @@
 	const { addIngredient } = ingredientStore
 
 	const newIngredient = {
-		name: 'Onion',
+		name: 'Another Onion',
 		brand: 'Generic',
 		nutrition: {
 			kcal: 40,

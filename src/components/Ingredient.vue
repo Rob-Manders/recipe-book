@@ -11,13 +11,18 @@
 		<li>Protein: {{ protein }}</li>
 		<li>Salt: {{ salt }}</li>
 	</ul>
+
+	<button @click="deleteIngredient(id)">Delete</button>
 </template>
 
 <script setup lang="ts">
 	import type { DocumentData } from 'firebase/firestore'
+	import { useIngredientStore } from '@/stores/ingredients'
 
 	const props = defineProps<{ ingredient: DocumentData }>()
 
-	const { name, brand } = props.ingredient
+	const { id, name, brand } = props.ingredient
 	const { kcal, fat, saturatedFat, carbohydrate, sugars, fibre, protein, salt } = props.ingredient.nutrition
+
+	const { deleteIngredient } = useIngredientStore()
 </script>

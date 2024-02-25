@@ -10,7 +10,6 @@ export interface Nutrition {
 }
 
 export interface Ingredient {
-	id: string
 	name: string
 	brand: string
 	nutrition: Nutrition
