@@ -1,13 +1,12 @@
 <template>
 	<h1>Ingredients</h1>
 
-	<button @click="() => addIngredient(newIngredient)">Add Ingredient</button>
+	<!-- <button @click="() => addIngredient(newIngredient)">Add Ingredient</button> -->
 
-	<Ingredient v-for="ingredient in ingredients" :ingredient="ingredient" />
+	<Ingredient v-for="ingredient in ingredients" :ingredient="ingredient" :key="ingredient.id" />
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
 import { useIngredientStore } from '@/stores/ingredients';
 import Ingredient from '../components/Ingredient.vue'
 import { storeToRefs } from 'pinia';
@@ -18,7 +17,6 @@ const { ingredients } = storeToRefs(ingredientStore)
 const { addIngredient } = ingredientStore
 
 const newIngredient = {
-	id: 'ingredientId123',
 	name: 'Onion',
 	brand: 'Generic',
 	nutrition: {

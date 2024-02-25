@@ -14,9 +14,9 @@
 </template>
 
 <script setup lang="ts">
-import type { Ingredient } from '../types'
+import type { DocumentData } from 'firebase/firestore';
 
-const props = defineProps<{ ingredient: Ingredient }>()
+const props = defineProps<{ ingredient: DocumentData }>()
 
 const { name, brand } = props.ingredient
 const {
