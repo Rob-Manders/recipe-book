@@ -9,10 +9,11 @@
 
 <script setup lang="ts">
 	import { computed } from 'vue'
-	import { useRoute } from 'vue-router'
+	import { useRoute, useRouter } from 'vue-router'
 	import { useIngredientStore } from '@/stores/ingredients'
 
 	const route = useRoute()
+	const router = useRouter()
 	const id = route.params.id as string
 
 	const { getIngredient, editIngredient } = useIngredientStore()
@@ -25,5 +26,7 @@
 		}
 
 		await editIngredient(id, editedIngredient)
+
+		router.push('/ingredients')
 	}
 </script>
