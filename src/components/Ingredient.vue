@@ -13,6 +13,7 @@
 	</ul>
 
 	<button @click="deleteIngredient(id)">Delete</button>
+	<RouterLink :to="`/ingredients/${id}`">Edit</RouterLink>
 </template>
 
 <script setup lang="ts">

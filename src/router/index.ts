@@ -13,6 +13,16 @@ const router = createRouter({
 			path: '/ingredients',
 			name: 'ingredients',
 			component: () => import('../views/IngredientsView.vue')
+		},
+		{
+			path: '/ingredients/new',
+			name: 'new ingredient',
+			component: () => import('../views/NewIngredientView.vue')
+		},
+		{
+			path: '/ingredients/:id',
+			name: 'edit ingredient',
+			component: () => import('../views/EditIngredientView.vue')
 		}
 	]
 })
