@@ -1,16 +1,33 @@
-import { ref } from 'vue'
 import { defineStore } from 'pinia'
+import { useFirestore, useCollection } from 'vuefire'
+import { collection, addDoc, doc, deleteDoc, updateDoc, type DocumentData } from 'firebase/firestore'
 
 import type { Recipe } from '@/types'
 
+const db = useFirestore()
+
 export const useRecipeStore = defineStore('recipe', () => {
-	const recipes = ref<Recipe[]>([])
+	const recipes = useCollection(collection(db, 'recipes'))
 
-	function addRecipe(recipe: Recipe) {
-		recipes.value = [...recipes.value, recipe]
+	function getRecipe(id: string | string[]): DocumentData | null {
+		const recipe = recipes.value.filter(recipe => recipe.id === id)
 
-		// Add recipe to Firestore.
+		return recipe.length > 0 ? recipe[0] : null
 	}
 
-	return { recipes, addRecipe }
+	async function addRecipe(recipe: Recipe) {
+		await addDoc(collection(db, 'recipes'), recipe)
+	}
+
+	async function editRecipe(id: string, recipe: DocumentData) {
+		const recipeRef = doc(db, 'recipes', id)
+
+		await updateDoc(recipeRef, recipe)
+	}
+
+	async function deleteRecipe(id: string) {
+		await deleteDoc(doc(db, 'recipes', id))
+	}
+
+	return { recipes, getRecipe, addRecipe, editRecipe, deleteRecipe }
 })
