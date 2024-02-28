@@ -1,8 +1,11 @@
 import { defineStore } from 'pinia'
 import { useFirestore, useCollection } from 'vuefire'
 import { collection, addDoc, doc, deleteDoc, updateDoc, type DocumentData } from 'firebase/firestore'
+import { getOrCreateFirebaseApp } from '@/firebase/app'
 
 import type { Ingredient } from '@/types'
+
+getOrCreateFirebaseApp()
 
 const db = useFirestore()
 

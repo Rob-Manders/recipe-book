@@ -10,12 +10,10 @@ const config: FirebaseOptions = {
 	appId: import.meta.env.VITE_FIREBASE_APP_ID
 }
 
-function createFirebaseApp(config: FirebaseOptions): FirebaseApp {
+export function getOrCreateFirebaseApp(): FirebaseApp {
 	try {
 		return getApp()
 	} catch {
 		return initializeApp(config)
 	}
 }
-
-export const firebaseApp: FirebaseApp = createFirebaseApp(config)

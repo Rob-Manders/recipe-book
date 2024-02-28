@@ -6,8 +6,9 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 import { VueFire, VueFireAuth } from 'vuefire'
-import { firebaseApp } from './firebase/app'
+import { getOrCreateFirebaseApp } from './firebase/app'
 
+const firebaseApp = getOrCreateFirebaseApp()
 const app = createApp(App)
 
 app.use(createPinia())
