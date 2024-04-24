@@ -12,10 +12,20 @@ const db = useFirestore()
 export const useIngredientStore = defineStore('ingredient', () => {
 	const ingredients = useCollection(collection(db, 'ingredients'))
 
-	function getIngredient(id: string | string[]): DocumentData | null {
+	function getIngredientById(id: string | string[]): DocumentData | null {
 		const ingredient = ingredients.value.filter(ingredient => ingredient.id === id)
 
 		return ingredient.length > 0 ? ingredient[0] : null
+	}
+
+	function getIngredientByName(name: string): DocumentData | null {
+		const ingredient = ingredients.value.filter(ingredient => ingredient.name === name)
+
+		return ingredient.length > 0 ? ingredient[0] : null
+	}
+
+	function getIngredientNames(): string[] {
+		return ingredients.value.map(ingredient => ingredient.name)
 	}
 
 	async function addIngredient(ingredient: Ingredient) {
@@ -32,5 +42,13 @@ export const useIngredientStore = defineStore('ingredient', () => {
 		await deleteDoc(doc(db, 'ingredients', id))
 	}
 
-	return { ingredients, getIngredient, addIngredient, editIngredient, deleteIngredient }
+	return {
+		ingredients,
+		getIngredientById,
+		getIngredientByName,
+		getIngredientNames,
+		addIngredient,
+		editIngredient,
+		deleteIngredient
+	}
 })

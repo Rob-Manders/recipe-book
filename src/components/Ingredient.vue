@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 	import type { DocumentData } from 'firebase/firestore'
-	import { useIngredientStore } from '@/stores/ingredients'
+	import { useIngredientStore } from '@/store/ingredients'
 
 	const props = defineProps<{ ingredient: DocumentData }>()
 
