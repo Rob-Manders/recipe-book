@@ -1,16 +1,18 @@
 <template>
 	<p>{{ id }}</p>
 
-	<IngredientForm :id="id" />
+	<TextInput name="Input Box" v-model="inputValue" />
+
+	<p>{{ inputValue }}</p>
 
 	<button @click="updateIngredient">Edit Ingredient</button>
 </template>
 
 <script setup lang="ts">
-	import { computed } from 'vue'
+	import { computed, ref } from 'vue'
 	import { useRoute, useRouter } from 'vue-router'
 	import { useIngredientStore } from '@/stores/ingredients'
-	import IngredientForm from '@/components/IngredientForm.vue'
+	import TextInput from '@/components/forms/TextInput.vue'
 
 	const route = useRoute()
 	const router = useRouter()
@@ -18,6 +20,8 @@
 
 	const { getIngredient, editIngredient } = useIngredientStore()
 	const ingredient = computed(() => getIngredient(id))
+
+	const inputValue = ref('Some Value')
 
 	async function updateIngredient() {
 		const editedIngredient = {
