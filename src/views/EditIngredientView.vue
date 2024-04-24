@@ -1,8 +1,7 @@
 <template>
 	<p>{{ id }}</p>
 
-	<div v-if="ingredient">{{ ingredient }}</div>
-	<div v-else>Ingredient does not exist.</div>
+	<IngredientForm :id="id" />
 
 	<button @click="updateIngredient">Edit Ingredient</button>
 </template>
@@ -11,6 +10,7 @@
 	import { computed } from 'vue'
 	import { useRoute, useRouter } from 'vue-router'
 	import { useIngredientStore } from '@/stores/ingredients'
+	import IngredientForm from '@/components/IngredientForm.vue'
 
 	const route = useRoute()
 	const router = useRouter()
