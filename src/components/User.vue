@@ -1,6 +1,8 @@
 <template>
-	<img v-if="user?.photoURL" :src="user?.photoURL" />
-	<button @click="toggleLogin">{{ user ? 'Logout' : 'Login' }}</button>
+	<div class="user">
+		<button @click="toggleLogin" class="loginButton">{{ user ? 'Logout' : 'Login' }}</button>
+		<img v-if="user?.photoURL" :src="user?.photoURL" class="avatar" />
+	</div>
 </template>
 
 <script lang="ts">
@@ -33,3 +35,17 @@
 		}
 	}
 </script>
+
+<style lang="scss">
+	.user {
+		display: flex;
+		align-items: center;
+	}
+
+	.avatar {
+		width: 48px;
+		aspect-ratio: 1 / 1;
+		border-radius: 50%;
+		margin-left: 0.5rem;
+	}
+</style>

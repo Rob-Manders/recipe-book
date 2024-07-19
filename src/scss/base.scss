@@ -1,0 +1,16 @@
+@use 'fonts';
+@use 'palette' as *;
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	font-weight: normal;
+}
+
+body {
+	background-color: $background;
+	font-family: 'Montserrat', sans-serif;
+	color: $text;
+}
