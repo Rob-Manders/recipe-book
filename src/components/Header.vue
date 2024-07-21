@@ -18,6 +18,6 @@
 		justify-content: space-between;
 		align-items: center;
 		background-color: $primary;
-		padding: 0.25rem 0.5rem;
+		height: 56px;
 	}
 </style>
