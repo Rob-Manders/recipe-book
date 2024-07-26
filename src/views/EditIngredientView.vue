@@ -1,6 +1,4 @@
 <template>
-	<h2>Edit Ingredient</h2>
-
 	<p>{{ errorMessage }}</p>
 
 	<form class="ingredient-form">

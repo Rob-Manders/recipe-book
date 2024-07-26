@@ -14,4 +14,8 @@
 	const user = useCurrentUser()
 </script>
 
-<style scoped></style>
+<style scoped>
+	main {
+		padding: 0.5rem;
+	}
+</style>

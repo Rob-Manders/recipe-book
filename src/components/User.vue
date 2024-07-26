@@ -1,7 +1,7 @@
 <template>
 	<div class="user">
 		<button @click="toggleLogin" class="user__login-button">{{ user ? 'Logout' : 'Login' }}</button>
-		<img v-if="user?.photoURL" :src="user?.photoURL" class="user__avatar" />
+		<img v-if="user?.photoURL" :src="user?.photoURL" class="user__avatar" alt="user avatar" />
 	</div>
 </template>
 

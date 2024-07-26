@@ -1,6 +1,4 @@
 <template>
-	<h1>Ingredients</h1>
-
 	<Ingredient v-for="ingredient in ingredients" :ingredient="ingredient" :key="ingredient.id" />
 </template>
 
@@ -10,7 +8,6 @@
 	import Ingredient from '@/components/Ingredient.vue'
 
 	const ingredientStore = useIngredientStore()
-	const { getIngredientNames } = useIngredientStore()
 
 	const { ingredients } = storeToRefs(ingredientStore)
 </script>
