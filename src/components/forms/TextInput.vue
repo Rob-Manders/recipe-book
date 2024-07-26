@@ -17,13 +17,30 @@
 </script>
 
 <style scoped lang="scss">
-	.text-input {
-		&__label {
+	@use '@/scss/palette' as *;
 
+	.text-input {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 0.5rem;
+
+		&__label {
+			font-size: 0.8rem;
+			opacity: 0.9;
+			margin-bottom: 0.25rem;
 		}
 
 		&__input {
+			border-radius: 5px;
+			background-color: $secondary-light;
+			border: none;
+			border-bottom: 3px solid $secondary-light;
+			padding: 0.75rem 0.75rem 0.5rem;
 
+			&:focus {
+				outline: none;
+				border-bottom: 3px solid $primary;
+			}
 		}
 	}
 </style>

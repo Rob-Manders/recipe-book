@@ -1,5 +1,4 @@
 <template>
-	<p>{{ errorMessage }}</p>
 
 	<form class="ingredient-form">
 		<TextInput label="Name" v-model="ingredient.name" />
@@ -13,7 +12,10 @@
 		<TextInput label="Salt" v-model="ingredient.nutrition.salt" />
 	</form>
 
-	<button @click="updateOrAddIngredient">{{ newIngredient ? 'Create' : 'Update' }}</button>
+	<div class="ingredient-form__controls">
+		<p class="ingredient-form__error-message">{{ errorMessage }}</p>
+		<button class="ingredient-form__button" @click="updateOrAddIngredient">{{ newIngredient ? 'Create' : 'Update' }}</button>
+	</div>
 </template>
 
 <script setup lang="ts">
@@ -79,8 +81,39 @@
 </script>
 
 <style scoped lang="scss">
+	@use '@/scss/palette' as *;
+
 	.ingredient-form {
 		display: flex;
 		flex-direction: column;
+
+		&__controls {
+			display: flex;
+			justify-content: space-between;
+			margin-top: 0.25rem;
+		}
+
+		&__error-message {
+			color: $red;
+			font-size: 0.8rem;
+		}
+
+		&__button {
+			cursor: pointer;
+			display: block;
+			background-color: $primary;
+			color: $background;
+			border: none;
+			border-radius: 5px;
+			outline: none;
+			padding: 0.5rem 0.75rem;
+			font-size: 1.25rem;
+			transition: background 150ms ease-in-out;
+
+			&:hover,
+			&:focus {
+				background: $primary-dark;
+			}
+		}
 	}
 </style>
