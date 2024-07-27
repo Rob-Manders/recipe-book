@@ -70,12 +70,10 @@
 			}
 
 			await addIngredient(ingredient.value)
-
-			router.push('/ingredients')
+			await router.push('/ingredients')
 		} else {
 			await editIngredient(id, ingredient.value)
-
-			router.push('/ingredients')
+			await router.push('/ingredients')
 		}
 	}
 </script>

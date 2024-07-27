@@ -1,0 +1,26 @@
+@use 'palette' as *;
+@use '@/scss/variables' as *;
+
+@mixin card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: $secondary-light;
+  margin-bottom: 0.5rem;
+  padding: 0.65rem;
+  border-radius: 5px;
+}
+
+@mixin card-buttons {
+  display: flex;
+  align-items: center;
+  margin-top: 0.3rem;
+}
+
+@mixin icon {
+  width: $card-button-size;
+  height: $card-button-size;
+  fill: $text;
+  opacity: 0.8;
+  transition: fill 150ms ease-in-out;
+}

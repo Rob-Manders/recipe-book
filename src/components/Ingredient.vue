@@ -6,12 +6,8 @@
 		</div>
 
 		<div class="ingredient__buttons">
-			<RouterLink :to="`/ingredients/${id}`" class="ingredient__button ingredient__edit-button">
-				<EditIcon />
-			</RouterLink>
-			<button @click="deleteIngredient(id)" class="ingredient__button ingredient__delete-button">
-				<DeleteIcon />
-			</button>
+			<EditButton :id="id" type="ingredients" />
+			<DeleteButton :delete-function="() => deleteIngredient(id)" />
 		</div>
 	</div>
 </template>
@@ -19,8 +15,8 @@
 <script setup lang="ts">
 	import type { DocumentData } from 'firebase/firestore'
 	import { useIngredientStore } from '@/stores/ingredients'
-	import EditIcon from '@/components/icons/EditIcon.vue'
-	import DeleteIcon from '@/components/icons/DeleteIcon.vue'
+	import DeleteButton from '@/components/buttons/DeleteButton.vue'
+	import EditButton from '@/components/buttons/EditButton.vue'
 
 	const props = defineProps<{ ingredient: DocumentData }>()
 
@@ -29,17 +25,11 @@
 </script>
 
 <style scoped lang="scss">
+	@use '@/scss/mixins' as *;
 	@use '@/scss/palette' as *;
 
-	$button-size: 28px;
-
 	.ingredient {
-		display: flex;
-		justify-content: space-between;
-		background-color: $secondary-light;
-		margin-bottom: 0.5rem;
-		padding: 0.5rem 0.5rem;
-		border-radius: 5px;
+		@include card;
 
 		&__name {
 			font-size: 1.25rem;
@@ -51,40 +41,7 @@
 		}
 
 		&__buttons {
-			display: flex;
-			align-items: center;
-		}
-
-		&__button {
-			height: $button-size;
-			width: $button-size;
-		}
-
-		&__delete-button {
-			cursor: pointer;
-			background: none;
-			border: none;
-			padding: 0;
-			margin-left: 0.25rem;
-		}
-	}
-
-	.icon {
-		width: $button-size;
-		height: $button-size;
-
-		&--edit,
-		&--delete {
-			fill: $text;
-			opacity: 0.8;
-		}
-
-		&--edit:hover {
-			fill: $primary-dark;
-		}
-
-		&--delete:hover {
-			fill: $red;
+			@include card-buttons;
 		}
 	}
 </style>
