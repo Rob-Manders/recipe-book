@@ -2,7 +2,7 @@
 	<div class="recipe">
 		<div class="recipe__details">
 			<p class="recipe__name">{{ name }}</p>
-			<p class="recipe__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+			<p class="recipe__description">{{description }}</p>
 		</div>
 
 		<div class="recipe__buttons">
@@ -19,7 +19,7 @@
 	import EditButton from '@/components/buttons/EditButton.vue'
 
 	const props = defineProps<{ recipe: DocumentData }>()
-	const { id, name } = props.recipe
+	const { id, name, description } = props.recipe
 
 	const { deleteRecipe } = useRecipeStore()
 </script>
