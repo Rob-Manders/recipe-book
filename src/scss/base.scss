@@ -4,13 +4,14 @@
 *,
 *::before,
 *::after {
-	box-sizing: border-box;
-	margin: 0;
-	font-weight: normal;
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+  outline: none;
 }
 
 body {
-	background-color: $background;
-	font-family: 'Montserrat', sans-serif;
-	color: $text;
+  background-color: $background;
+  font-family: 'Montserrat', sans-serif;
+  color: $text;
 }
