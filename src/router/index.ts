@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '@/views/HomeView.vue'
+import EditRecipeView from '@/views/EditRecipeView.vue'
+import IngredientsView from '@/views/IngredientsView.vue'
+import EditIngredientView from '@/views/EditIngredientView.vue'
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,19 +13,19 @@ const router = createRouter({
 			component: HomeView
 		},
 		{
+			path: '/recipes/:id',
+			name: 'edit recipe',
+			component: EditRecipeView
+		},
+		{
 			path: '/ingredients',
 			name: 'ingredients',
-			component: () => import('../views/IngredientsView.vue')
+			component: IngredientsView
 		},
-		// {
-		// 	path: '/ingredients/new',
-		// 	name: 'new ingredient',
-		// 	component: () => import('../views/NewIngredientView.vue')
-		// },
 		{
 			path: '/ingredients/:id',
 			name: 'edit ingredient',
-			component: () => import('../views/EditIngredientView.vue')
+			component: EditIngredientView
 		}
 	]
 })

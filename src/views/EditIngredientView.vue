@@ -1,5 +1,4 @@
 <template>
-
 	<form class="ingredient-form">
 		<TextInput label="Name" v-model="ingredient.name" />
 		<TextInput label="kCal" v-model="ingredient.nutrition.kcal" />
@@ -19,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-	import { computed, onMounted, ref } from 'vue'
+	import { computed, onMounted, ref, triggerRef } from 'vue'
 	import { useRoute, useRouter } from 'vue-router'
 	import { useIngredientStore } from '@/stores/ingredients'
 	import TextInput from '@/components/forms/TextInput.vue'
@@ -57,6 +56,8 @@
 		if (data) {
 			ingredient.value = data
 			newIngredient.value = false
+		} else {
+			errorMessage.value = 'Invalid ingredient ID'
 		}
 	})
 

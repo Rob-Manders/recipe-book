@@ -1,6 +1,6 @@
 <template>
-	<Modal :model-value="showModal" @update:model-value="() => (showModal = !showModal)" header-text="Test Modal"
-		>Test Modal
+	<Modal :model-value="showModal" @update:model-value="() => (showModal = !showModal)" header-text="Test Modal">
+		Test Modal
 	</Modal>
 	<Recipe v-for="recipe in recipes" :recipe="recipe" />
 	<button @click="() => (showModal = !showModal)">Toggle Modal</button>

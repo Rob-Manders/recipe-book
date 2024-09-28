@@ -15,7 +15,7 @@ export const useRecipeStore = defineStore('recipe', () => {
 
 	const recipes = useCollection(collection(db, 'users', userId, 'recipes'))
 
-	function getRecipe(id: string | string[]): DocumentData | null {
+	function getRecipeById(id: string | string[]): DocumentData | null {
 		const recipe = recipes.value.filter(recipe => recipe.id === id)
 
 		return recipe.length > 0 ? recipe[0] : null
@@ -35,5 +35,5 @@ export const useRecipeStore = defineStore('recipe', () => {
 		await deleteDoc(doc(db, 'users', userId, 'recipes', id))
 	}
 
-	return { recipes, getRecipe, addRecipe, editRecipe, deleteRecipe }
+	return { recipes, getRecipeById, addRecipe, editRecipe, deleteRecipe }
 })
