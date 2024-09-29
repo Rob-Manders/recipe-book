@@ -3,11 +3,13 @@
 </template>
 
 <script setup lang="ts">
-	import { storeToRefs } from 'pinia'
-	import { useIngredientStore } from '@/stores/ingredients'
+	import { fetchIngredients } from '@/data/ingredients'
 	import Ingredient from '@/components/Ingredient.vue'
+	import { onBeforeMount, ref } from 'vue'
 
-	const ingredientStore = useIngredientStore()
+	const ingredients = ref<Ingredient[]>([])
 
-	const { ingredients } = storeToRefs(ingredientStore)
+	onBeforeMount(async () => {
+		await fetchIngredients().then(data => ingredients.value = data)
+	})
 </script>

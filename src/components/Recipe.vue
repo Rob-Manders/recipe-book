@@ -13,15 +13,13 @@
 </template>
 
 <script setup lang="ts">
-	import type { DocumentData } from 'firebase/firestore'
-	import { useRecipeStore } from '@/stores/recipes'
+	import { deleteRecipe } from '@/data/recipes'
 	import DeleteButton from '@/components/buttons/DeleteButton.vue'
 	import EditButton from '@/components/buttons/EditButton.vue'
+	import type { Recipe } from '@/types'
 
-	const props = defineProps<{ recipe: DocumentData }>()
+	const props = defineProps<{ recipe: Recipe }>()
 	const { id, name, description } = props.recipe
-
-	const { deleteRecipe } = useRecipeStore()
 </script>
 
 <style scoped lang="scss">

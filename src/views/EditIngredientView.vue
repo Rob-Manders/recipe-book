@@ -18,9 +18,15 @@
 </template>
 
 <script setup lang="ts">
-	import { computed, onMounted, ref, triggerRef } from 'vue'
+	import { computed, onBeforeMount, onMounted, ref } from 'vue'
 	import { useRoute, useRouter } from 'vue-router'
-	import { useIngredientStore } from '@/stores/ingredients'
+	import {
+		addIngredient,
+		fetchIngredients,
+		getIngredientById,
+		getIngredientNames,
+		updateIngredient
+	} from '@/data/ingredients'
 	import TextInput from '@/components/forms/TextInput.vue'
 	import type { Ingredient } from '@/types'
 
@@ -28,9 +34,7 @@
 	const router = useRouter()
 	const id = route.params.id as string
 
-	const { getIngredientById, getIngredientNames, addIngredient, editIngredient } = useIngredientStore()
-
-	const ingredientNames = computed(() => getIngredientNames())
+	const ingredientNames = ref<string[]>([])
 
 	const newIngredient = ref(true)
 	const errorMessage = ref('')
@@ -48,10 +52,12 @@
 		}
 	})
 
-	onMounted(() => {
+	onBeforeMount(async () => {
+		await getIngredientNames().then(names => ingredientNames.value = names)
+
 		if (id === 'new') return
 
-		const data = getIngredientById(id) as Ingredient
+		const data = await getIngredientById(id)
 
 		if (data) {
 			ingredient.value = data
@@ -64,18 +70,17 @@
 	async function updateOrAddIngredient() {
 		if (newIngredient) {
 			const ingredientExists = ingredientNames.value.includes(ingredient.value.name)
-
 			if (ingredientExists) {
 				errorMessage.value = 'Ingredient already exists.'
 				return
 			}
 
 			await addIngredient(ingredient.value)
-			await router.push('/ingredients')
 		} else {
-			await editIngredient(id, ingredient.value)
-			await router.push('/ingredients')
+			await updateIngredient(id, ingredient.value)
 		}
+
+		await router.push('/ingredients')
 	}
 </script>
 

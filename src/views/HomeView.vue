@@ -7,13 +7,15 @@
 </template>
 
 <script setup lang="ts">
-	import { storeToRefs } from 'pinia'
-	import { useRecipeStore } from '@/stores/recipes'
+	import { fetchRecipes } from '@/data/recipes'
 	import Recipe from '@/components/Recipe.vue'
-	import { ref } from 'vue'
+	import { onBeforeMount, ref } from 'vue'
 	import Modal from '@/components/Modal.vue'
 
 	const showModal = ref(false)
-	const recipeStore = useRecipeStore()
-	const { recipes } = storeToRefs(recipeStore)
+	const recipes = ref<Recipe[]>([])
+
+	onBeforeMount(async () => {
+		await fetchRecipes().then(data => recipes.value = data)
+	})
 </script>

@@ -10,11 +10,20 @@ export interface Nutrition {
 }
 
 export interface Ingredient {
+	id: string
 	name: string
 	nutrition: Nutrition
 }
 
+export interface RecipeIngredient {
+	amount: int,
+	ingredientId: string
+}
+
 export interface Recipe {
+	id: string,
 	name: string
-	ingredients: Ingredient[]
+	description: string,
+	portions: number,
+	ingredients: RecipeIngredient[]
 }

@@ -13,11 +13,11 @@
 
 <script setup lang="ts">
 	import { ref } from 'vue'
-	import { signInWithPopup, signOut } from 'firebase/auth'
-	import { useCurrentUser, useFirebaseAuth } from 'vuefire'
+	import { getAuth, signInWithPopup, signOut } from 'firebase/auth'
+	import { getUser } from '@/firebase/user'
 
-	const auth = useFirebaseAuth()!
-	const user = useCurrentUser()
+	const auth = getAuth()
+	const user = getUser()
 
 	const error = ref(null)
 
