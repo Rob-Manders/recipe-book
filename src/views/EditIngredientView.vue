@@ -18,11 +18,10 @@
 </template>
 
 <script setup lang="ts">
-	import { computed, onBeforeMount, onMounted, ref } from 'vue'
+	import { onBeforeMount, ref } from 'vue'
 	import { useRoute, useRouter } from 'vue-router'
 	import {
 		addIngredient,
-		fetchIngredients,
 		getIngredientById,
 		getIngredientNames,
 		updateIngredient
@@ -39,6 +38,7 @@
 	const newIngredient = ref(true)
 	const errorMessage = ref('')
 	const ingredient = ref<Ingredient>({
+		id: '',
 		name: '',
 		nutrition: {
 			kcal: null,
@@ -70,6 +70,7 @@
 	async function updateOrAddIngredient() {
 		if (newIngredient) {
 			const ingredientExists = ingredientNames.value.includes(ingredient.value.name)
+
 			if (ingredientExists) {
 				errorMessage.value = 'Ingredient already exists.'
 				return

@@ -5,7 +5,7 @@
 		<TextInput label="Portions" v-model="recipe.portions" />
 	</form>
 
-	<div v-for="ingredient in ingredients" class="recipe-form__ingredients">
+	<div v-for="ingredient in recipeIngredients" class="recipe-form__ingredients">
 		<p>{{ ingredient.name }}</p>
 		<p>{{ ingredient.amount }}g</p>
 	</div>
@@ -21,7 +21,7 @@
 	import { computed, onBeforeMount, onMounted, ref } from 'vue'
 	import { useRoute, useRouter } from 'vue-router'
 	import { fetchRecipes, getRecipeById, getRecipeNames, getRecipeByName, addRecipe, updateRecipe } from '@/data/recipes'
-	import { fetchIngredients } from '@/data/ingredients'
+	import { fetchIngredients, getIngredientById } from '@/data/ingredients'
 	import TextInput from '@/components/forms/TextInput.vue'
 
 	import type { Nutrition, Recipe } from '@/types'
@@ -31,8 +31,7 @@
 	const id = route.params.id as string
 
 	const ingredients = ref<Ingredient[]>([])
-	const recipes = ref<Recipe[]>([])
-	const recipeNames = computed(() => getRecipeNames(recipes))
+	const recipeNames = ref<string[]>([])
 
 	const newRecipe = ref(true)
 	const errorMessage = ref('')
@@ -49,15 +48,13 @@
 		nutrition: Nutrition
 	}>()
 
-	onBeforeMount(() => {
-		ingredients.value = fetchIngredients()
-		recipes.value = fetchRecipes()
-	})
+	onMounted(async () => {
+		await getRecipeNames().then(names => recipeNames.value = names)
+		await fetchIngredients().then(data => ingredients.value = data)
 
-	onMounted(() => {
 		if (id === 'new') return
 
-		const data = getRecipeById(recipes.value, id)
+		const data = await getRecipeById(id)
 
 		if (data) {
 			recipe.value = data
@@ -71,7 +68,7 @@
 
 	function getIngredients() {
 		recipeIngredients.value = recipe.value.ingredients.map(ingredient => {
-			const ingredientData = getIngredientById(ingredients.value, ingredient.ingredientId)
+			const ingredientData = ingredients.value.find(entry => entry.id === ingredient.ingredientId.trim())
 
 			return {
 				name: ingredientData.name,

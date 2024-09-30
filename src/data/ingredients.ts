@@ -37,7 +37,7 @@ export async function getIngredientById(id: string): Ingredient | null {
 
 	return {
 		id: ingredient.id,
-		...ingredient
+		...ingredient.data()
 	}
 }
 
@@ -57,15 +57,27 @@ export function getIngredientByName(ingredients: Ingredient[], name: string): In
 }
 
 export async function addIngredient(ingredient: Ingredient) {
+	const app = getOrCreateFirebaseApp()
+	const db = getFirestore(app)
+	const userId = getUserId()
+
 	await addDoc(collection(db, 'users', userId, 'ingredients'), ingredient)
 }
 
 export async function updateIngredient(id: string, ingredient: Ingredient) {
+	const app = getOrCreateFirebaseApp()
+	const db = getFirestore(app)
+	const userId = getUserId()
+
 	const ingredientRef = doc(db, 'users', userId, 'ingredients', id)
 
 	await updateDoc(ingredientRef, ingredient)
 }
 
 export async function deleteIngredient(id: string) {
+	const app = getOrCreateFirebaseApp()
+	const db = getFirestore(app)
+	const userId = getUserId()
+
 	await deleteDoc(doc(db, 'users', userId, 'ingredients', id))
 }
